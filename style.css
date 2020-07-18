@@ -1,0 +1,190 @@
+/*	elisttm - stylesheet
+
+	[top] [right] [bottom] [left]
+*/
+
+body {
+  background-color: #222; color: #fff; text-align: center; 
+	margin: 0; padding: 45px 8% 25px 8%;
+	-webkit-font-smoothing: antialiased;
+
+	-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select: none;-moz-user-select:none;-ms-user-select: none;
+  -ms-animation:fadein 1s;-o-animation:fadein 1s;-webkit-animation:fadein 1s;-moz-animation:fadein 1s;animation:fadein 1s;
+}
+
+@keyframes fadein{from{opacity:0;}to{opacity:1;}} @-moz-keyframes fadein{from{opacity:0;}to{opacity:1;}} @-webkit-keyframes fadein{from{opacity:0;}to{opacity:1;}}
+body.fade{opacity:0;transition:none;}
+
+
+a {color: #bbb; text-decoration: none; transition: 0.5s} 
+	a:hover {transition: 0.5s; color: #999; text-decoration: underline}
+p {font-family: 'Franklin Gothic Medium', sans-serif;padding-bottom: 3mm;line-height:1.25}
+li {font-family: 'Franklin Gothic Medium', sans-serif;padding-bottom: 4px}
+ul {font-family: 'Franklin Gothic Medium', sans-serif;padding-bottom: 4mm;}
+ol {font-family: 'Franklin Gothic Medium', sans-serif;padding-bottom: 4mm;}
+dl {font-family: 'Franklin Gothic Medium', sans-serif;padding-bottom: 4mm;}
+dd {font-family: 'Franklin Gothic Medium', sans-serif;}
+dt {font-family: 'Franklin Gothic Medium', sans-serif;}
+h1 {font-family: 'Courier New', Courier, monospace;}
+h2 {font-family: 'Courier New', Courier, monospace;}
+h3 {font-family: 'Courier New', Courier, monospace;}
+h4 {font-family: 'Courier New', Courier, monospace;}
+h5 {font-family: 'Courier New', Courier, monospace;}
+h6 {font-family: 'Courier New', Courier, monospace;}
+
+div {border-radius: 5px; margin: auto;}
+
+table {text-align: center; margin-left: auto; margin-right: auto; padding: 5px;}
+tr {padding: 2px;} td {padding: 5px;}
+
+button {background-color: #fff; color: #333; border: none; outline-style: none; cursor: pointer;
+margin: 1px 3px; padding: 10px 11px; border-radius: 6px; transition: 0.35s;}
+button:hover {background-color: #333; color: #fff; margin: 0px; padding: 11px 14px; transition: 0.25s;}
+
+st {font-size: 14px; color: #ccc;}
+
+/* 
+================================================== 
+==================================================
+			========   element styles   ========
+*/ 
+
+.content {padding: 0 8% 0 8%;} .content p{padding-bottom:0px;}
+
+.list {text-align: left; padding: 0 15% 0 15%;}
+	.list li {font-family: Monospace; font-size: 14px; line-height: 1.35;}
+
+.tbiframe {border: none; height: 34px; width: 300px; border-radius: 4px;}
+
+.tbcmd {
+	overflow: scroll; border: 1px solid black;
+	width: 100%; height: 110%; padding-bottom: 16px;
+	position: absolute; top: 64px; bottom: 0%; left: 0; right: 0;
+}
+
+.footer {background-color: #333; color: #fff; text-align: center;
+position: fixed; padding: 0; left: 0; bottom: 0%; width: 100%; height: 20px;}
+	.footer p {font-family:  'Courier New', Courier, monospace; font-size: 6pt;}
+
+/* 
+==================================================
+	  -----   element styles: header   -----
+*/
+
+.visible {font-family: 'Franklin Gothic Medium', sans-serif; background-color: #222; padding: 6mm;}
+
+.header {background-color: #333; color: #fff; text-align: center; position: fixed; transition: 1s; padding: 2px 8% 2px 8%; overflow: hidden; z-index: 999; display: block; width: 100%; left: 0; right: 0; top: 0;}
+	.header a {color: #fff; font-family: 'Monospace', monospace; font-size: 15px; line-height: 30px; text-decoration: none; transition: 0.25s; padding: 10px 12px 10px 12px; margin: 0px 1px 0px 1px; border-radius: 8px; float: left; vertical-align: center;}
+		.header a:hover {background-color: #666; color: #fff; margin: 1px 1px 0 1px}
+		.header a.active {background-color: #fff; color: #333; margin: 1px 0 0 0}
+		.header a.logo {margin: 0; padding: 6px 13px 7px 13px; font-family: 'Courier New', monospace; font-size: 25px; font-weight: bold;} .header a.logo:hover {margin: 0}
+
+	.logo {font-family: 'Courier New', Courier, monospace; font-size: 24px; text-align: left; line-height: 20px; float: left; margin-left: 0;}
+		.logo img {vertical-align: middle; line-height: 1.6; width: 40px; height: 40px; margin: 0 8px 0 0px}
+
+	.header h3 {font-family: 'Courier New', Courier, monospace; font-size: 12pt;}
+
+	.header button {background-color: #333; color: #fff; transition: 0.3s; line-height: 30px; font-size: 30px; text-align: center; border-radius: 8px; vertical-align: center; position: right; float: right; display: none; cursor: pointer;}
+		.header button:hover {background-color: #666; transition: 0.3s;}
+
+.header-right {background-color: #333; color: #fff; text-align: center;
+padding: 0px 0 0px 0; margin-right: 0; display: block; position: center; float: right;}
+
+@media screen and (max-width: 540px) {
+  .header a {float: none; display: block; text-align: left;}
+  .header-right {float: none; display: none;}
+  .header button {padding: 10px 20px 10px 20px; margin: 3px 3px 0 0; display: inline;}
+}
+
+/* 
+================================================== 
+	  -----   element styles: social buttons   -----  
+*/
+.sm {background-color: #322f30; padding: 12px 10px 8px; border-radius: 4px; display: inline; vertical-align: center; transition: .5s; -o-transition: .5s; -ms-transition: .5s; -moz-transition: .5s; -webkit-transition: .5s;}
+	.sm img{height: 18px; width: 18px;}
+.sm-icons-list {width: 100%; display: block; margin: 0;} 
+	.sm-icons-list ul {padding: 0; list-style: none}
+ul.sm-icons {margin-top: 35px;}
+	.sm-icons li {vertical-align: center; display: inline-block; height: 50px;}
+	.sm-icons a {color: #fff; vertical-align: center; text-decoration: none;}
+
+.sm:hover {padding: 15px 13px 11px; margin-right: 2px; margin-left: 2px; transition: .4s}
+.sm-twitter:hover {background-color: #00acee;}
+.sm-youtube:hover {background-color: #c4302b;}
+.sm-twitch:hover {background-color: #6441a5;}
+.sm-steam:hover {background-color: #2a475e;}
+.sm-github:hover {background-color: #211F1F;}
+.sm-discord:hover {background-color: #738adb;}
+.sm-patreon:hover {background-color: #f86752;}
+
+/*@media screen and (max-width: 360px) {
+	.sm {padding: 10px 8px 6px; margin-left: 2px; margin-right: 2px;}
+	sm:hover {padding: 12px 10px 8px; margin-left: 3px; margin-right: 3px;}
+	.sm img {height: 16px; width: 16px;}	
+}*/
+
+/* 
+==================================================
+	  -----  element styles: mcserver widget   -----  
+*/
+
+#rest {
+	font-family: 'Franklin Gothic Medium', sans-serif;
+	color: #999; font-size: 16px;
+}
+
+/* 
+==================================================
+	  -----  element styles: command list   -----  
+*/
+* {box-sizing: border-box;}
+.cmdlist {text-align: justify; padding: 0 20% 0 20%;}
+.cmdlist h3 {padding: 0 0% 0 0%} .cmdlist h3 st {font-size: 11px; color: #cccc;}
+.cmdlist dt {padding: 0 3% 0 3%; font-size: 14px; font-family: 'Courier New', Courier, monospace}
+.cmdlist dd {padding-bottom: 8px; font-size: 14px; font-family: 'Courier New', Courier, monospace}
+.cmdlist st {font-size: 10px; color: #dddd;}
+.cmdlist:after {content: ""; display: table; clear: both}
+
+/* 
+================================================== 
+*/
+
+
+.sidenav {position: fixed; background-color: #333; height: 100%; width: 0; padding-top: 60px; z-index: 1; overflow-x: hidden; top: 0; left: 0; transition: 0.5s;}
+	.sidenav a {font-family:  'Courier New', Courier, monospace; font-size: 16pt; color:#b4b4b4; 
+	text-decoration: none; text-align: center; display: block; padding: 8px 8px 8px 32px; padding-right: 15px; transition: 0.3s;}
+		.sidenav a:hover {color: #fff;}
+	.sidenav b {font-family:  'Courier New', Courier, monospace; font-size: 18pt; color:#b4b4b4; text-decoration: none; text-align: center;
+	padding: 8px 8px 8px 32px; padding-right: 15px; display: block; transition: 0.3s;}
+	.sidenav .closebtn {position: absolute; top: 0; right: 25px; margin-left: 50px; font-size: 36px;}
+
+#main {transition: margin-left 0.5s; padding: 16px;}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.menu {
+  position: fixed; float: left;
+  padding: 5px; margin: 0%; display: block;
+  border-top-right-radius: 5px; border-bottom-right-radius: 5px;
+  width: 40px; height: 40px;
+  transition: 0.3s;
+  color: #fff;
+}
+.menu:hover {background-color: #333; transition: 0.3s; cursor: pointer;}
+
+.alert {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px; margin-bottom: 15px;
+  background-color: #fff; color: #fff;
+  opacity: 1; transition: opacity 0.6s;
+  border-radius: 7px;
+}
+
+.closebtn {
+  float: right; margin-left: 15px;
+  color: white; line-height: 20px;
+  font-weight: bold; font-size: 22px;
+  cursor: pointer; transition: 0.3s;
+}
+.closebtn:hover {color: #23272a}
