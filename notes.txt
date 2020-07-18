@@ -1,9 +1,0 @@
-		notes and to do list
-
-add this:
-https://www.w3schools.com/howto/howto_js_scroll_indicator.asp
-
-integrate this maybe?
-https://www.w3schools.com/howto/howto_js_topnav_responsive.asp
-
-maybe steal newselas header
