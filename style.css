@@ -62,8 +62,7 @@ st {font-size: 14px; color: #ccc;}
 	position: absolute; top: 64px; bottom: 0%; left: 0; right: 0;
 }
 
-.footer {background-color: #333; color: #fff; text-align: center;
-position: fixed; padding: 0; left: 0; bottom: 0%; width: 100%; height: 20px;}
+.footer {background-color: #333; color: #fff; text-align: center; position: fixed; padding: 0; left: 0; bottom: 0%; width: 100%; height: 20px;}
 	.footer p {font-family:  'Courier New', Courier, monospace; font-size: 6pt;}
 
 /* 
@@ -100,7 +99,7 @@ padding: 0px 0 0px 0; margin-right: 0; display: block; position: center; float: 
 ================================================== 
 	  -----   element styles: social buttons   -----  
 */
-.sm {background-color: #322f30; padding: 12px 10px 8px; border-radius: 4px; display: inline; vertical-align: center; transition: .5s; -o-transition: .5s; -ms-transition: .5s; -moz-transition: .5s; -webkit-transition: .5s;}
+.sm {background-color: #333; padding: 12px 10px 8px; border-radius: 4px; display: inline; vertical-align: center; transition: .5s; -o-transition: .5s; -ms-transition: .5s; -moz-transition: .5s; -webkit-transition: .5s;}
 	.sm img{height: 18px; width: 18px;}
 .sm-icons-list {width: 100%; display: block; margin: 0;} 
 	.sm-icons-list ul {padding: 0; list-style: none}
@@ -122,16 +121,6 @@ ul.sm-icons {margin-top: 35px;}
 	sm:hover {padding: 12px 10px 8px; margin-left: 3px; margin-right: 3px;}
 	.sm img {height: 16px; width: 16px;}	
 }*/
-
-/* 
-==================================================
-	  -----  element styles: mcserver widget   -----  
-*/
-
-#rest {
-	font-family: 'Franklin Gothic Medium', sans-serif;
-	color: #999; font-size: 16px;
-}
 
 /* 
 ==================================================
