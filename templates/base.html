@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	{% if not no_analytics %}<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172482872-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-172482872-1');</script>{% endif %}
+	<title>{% block title %}{% endblock %}{% if self.title() %} : : {% endif %}elisttm</title>
+	<link rel="icon" href="/static/logo64.png" type='image/png'/>
+	<link rel="shortcut icon" href="/static/logo64.png"/>
+	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="awesome website by niche twitter micro celebrity elisttm"/>
+	<meta name="theme-color" content="#ffaec9"/>
+	<meta property="twitter:site" content="@elisttm"/>
+	<meta property="twitter:creator" content="@elisttm"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="{{ request.path }}"/>
+	<meta property="og:site_name" content="elisttm"/>
+	<meta property="og:image" content="/static/logo.png"/>
+	<meta property="og:title" content="{% block og_title %}eli website{% endblock %}"/>
+	<meta property="og:description" content="{% block og_desc %}my awesome and very cool website{% endblock %}"/>
+</head><body {% if self.background %}style="background-image: url('static/media/backgrounds/{% block background %}{% endblock %}');">{% endif %}
+
+<header><img src="/static/header.png" alt="eli header" onclick="window.location.href='/'"></header>
+
+<nav>
+	<a href="/">home</a>
+	<a href="/eli">sona</a>
+	<a href="/bot">elibot</a>
+	<a href="/pages">more...</a>
+</nav>
+
+<main>{% block content %}{% endblock %}</main>
+
+</body></html>

@@ -1,0 +1,7 @@
+todo
+.replit
+.breakpoints
+**/__pycache__/
+poetry.lock
+pyproject.toml
+requirements.txt

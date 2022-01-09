@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /robots.txt
+Allow: /sitemap.xml
+
+Sitemap: https://elisttm.space/sitemap.xml

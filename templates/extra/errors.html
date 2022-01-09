@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block meta_robots %}noindex, follow{% endblock %}
+{% block title %}{{ e[0] }}{% endblock %}
+{% block og_title %}{{ e[0] }}{% endblock %}
+{% block og_desc %}{{ e[1] }}{% endblock %}
+{% block background %}skeletons.jpg{% endblock %}
+
+{% block content %}
+
+<div style="margin:75px 0 100px;">
+	<h1>{{ e[0] }}</h1>
+	<h3>{{ e[1] }}</h3>
+<div>
+
+{% endblock %}
