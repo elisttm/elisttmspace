@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-	{% if not no_analytics %}<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172482872-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-172482872-1');</script>{% endif %}
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172482872-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-172482872-1');</script>
 	<title>{% block title %}{% endblock %}{% if self.title() %} : : {% endif %}elisttm</title>
 	<link rel="icon" href="/static/logo64.png" type='image/png'/>
 	<link rel="shortcut icon" href="/static/logo64.png"/>
@@ -9,7 +9,9 @@
 	<meta charset="utf-8"/>
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<meta name="description" content="awesome website by niche twitter micro celebrity elisttm"/>
+	<meta name="description" content="niche micro twitter celebrity elisttm website where i put all my stuff and information"/>
+	<meta name="keywords" content="eli, elisttm, discord, bot, trashbot, minecraft, pack, cat, fursona, gay">
+	<meta name="author" content="elisttm">
 	<meta name="theme-color" content="#ffaec9"/>
 	<meta property="twitter:site" content="@elisttm"/>
 	<meta property="twitter:creator" content="@elisttm"/>
@@ -21,7 +23,7 @@
 	<meta property="og:description" content="{% block og_desc %}my awesome and very cool website{% endblock %}"/>
 </head><body {% if self.background %}style="background-image: url('static/media/backgrounds/{% block background %}{% endblock %}');">{% endif %}
 
-<header><img src="/static/header.png" alt="eli header" onclick="window.location.href='/'"></header>
+<header><img src="/static/media/header.png" alt="eli header" onclick="window.location.href='/'"></header>
 
 <nav>
 	<a href="/">home</a>
