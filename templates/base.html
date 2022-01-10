@@ -21,7 +21,7 @@
 	<meta property="og:image" content="/static/logo.png"/>
 	<meta property="og:title" content="{% block og_title %}eli website{% endblock %}"/>
 	<meta property="og:description" content="{% block og_desc %}my awesome and very cool website{% endblock %}"/>
-</head><body {% if self.background %}style="background-image: url('static/media/backgrounds/{% block background %}{% endblock %}');">{% endif %}
+</head><body{% if self.background %} style="background-image: url('static/media/backgrounds/{% block background %}{% endblock %}');"{% endif %}>
 
 <header><img src="/static/media/header.png" alt="eli header" onclick="window.location.href='/'"></header>
 
@@ -32,6 +32,9 @@
 	<a href="/pages">more...</a>
 </nav>
 
-<main>{% block content %}{% endblock %}</main>
+<main>
+{% block content %}{% endblock %}
+</main>
 
-</body></html>
+</body>
+</html>
