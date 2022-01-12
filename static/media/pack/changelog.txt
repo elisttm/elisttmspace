@@ -1,0 +1,7 @@
+7/22/2021 [v1.6.1] 
+- fixed a bunch of mistakes i accidentally made after the last update
+- idk what else i did
+
+6/30/2021 [v1.6]
+- completely seperated the 1.8 pack from the 1.17 pack
+- updated textures to better fit 1.17, added some 1.17 textures, and fixed some old textures

@@ -6,9 +6,6 @@ app = quart.Quart(__name__)
 hyperconfig = hypercorn.config.Config()
 hyperconfig.bind = ["0.0.0.0:8080"]
 
-
-#		main routes
-
 @app.route('/')
 async def index(): 
 	return await quart.render_template('index.html')
@@ -29,9 +26,6 @@ async def pagelist():
 async def pack():
 	return await quart.render_template('pack.html')
 
-
-#		extra routes
-
 @app.route('/gmodload')
 @app.route('/tf2motd')
 async def source_motd(): 
@@ -41,12 +35,8 @@ async def source_motd():
 async def gmod_shortcut():
 	return await quart.render_template('extra/gmod.html')
 
-
-#		utility routes
-
 @app.route('/sitemap.xml')
 @app.route('/robots.txt')
-@app.route('/favicon.ico')
 async def static_from_root(): 
 	return await quart.send_from_directory(app.static_folder, quart.request.path[1:])
 
@@ -56,12 +46,11 @@ async def forbidden(error):
 
 @app.errorhandler(404)
 async def page_not_found(error): 
-	return await quart.render_template('extra/error.html', e=["[404] page not found",Markup('the url youre trying to access does not exist, either i screwed something up or you got a dead link')]), 404
+	return await quart.render_template('extra/error.html', e=["[404] page not found",Markup('the url youre trying to access does not exist, either i screwed something up or you got the wrong link')]), 404
 
 @app.errorhandler(500)
 async def internal_server(error): 
-	return await quart.render_template('extra/error.html', e=["[500] internal server error","somewhere along the way one of us (probably me) screwed something up and the server could not handle your request",]), 500
-
+	return await quart.render_template('extra/error.html', e=["[500] internal server error","somewhere along the way i screwed something up and there was an error in processing your request",]), 500
 
 if __name__ == '__main__':
 	#app.run(host="0.0.0.0", port=8080, use_reloader=True)

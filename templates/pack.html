@@ -1,11 +1,22 @@
 {% extends "base.html" %}
 
+{% set version = "1.6.1" %}
+
+{% block background %}{% endblock %}
 {% block title %}eli pack{% endblock %}
-{% block og_title %}eli pack [v{{ pack.version }}]{% endblock %}
+{% block og_title %}eli pack [v{{ version }}]{% endblock %}
 {% block og_desc %}my custom minecraft resource pack{% endblock %}
 
 {% block content %}
 
-<h1>nothing here yet</h1>
+<h1>eli pack [v{{ version }}]</h1>
+
+<p>my silly little minecraft resource pack</p>
+
+<a class="button" href="https://www.mediafire.com/folder/jp16jada9oima/eli_pack" target="_blank">downloads</a>
+<a class="button" href="/static/media/pack/changelog.txt" target="_blank">changelog</a>
+
+<img src="/static/media/pack/1.jpg" alt="screenshot of the pack in use"/>
+<p><a href="https://www.planetminecraft.com/project/presentation-4081168/">map created by pixxykilljoy</a></p>
 
 {% endblock %}
