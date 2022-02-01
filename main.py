@@ -1,10 +1,8 @@
 import quart, asyncio, hypercorn
+from quart import redirect, url_for
 from markupsafe import Markup
 
 app = quart.Quart(__name__)
-
-hyperconfig = hypercorn.config.Config()
-hyperconfig.bind = ["0.0.0.0:8080"]
 
 @app.route('/')
 async def index(): 
@@ -26,14 +24,19 @@ async def pagelist():
 async def pack():
 	return await quart.render_template('pack.html')
 
-@app.route('/gmodload')
-@app.route('/tf2motd')
-async def source_motd(): 
-	return await quart.render_template('extra/sourcemotd.html')
+@app.route('/minecraft')
+async def minecraft():
+	return await quart.render_template('minecraft.html')
 
 @app.route('/gmod')
 async def gmod_shortcut():
 	return await quart.render_template('extra/gmod.html')
+
+@app.route('/gmodload')
+@app.route('/tf2motd')
+@app.route('/srcmotd')
+async def source_motd(): 
+	return await quart.render_template('extra/sourcemotd.html')
 
 @app.route('/sitemap.xml')
 @app.route('/robots.txt')
@@ -52,6 +55,16 @@ async def page_not_found(error):
 async def internal_server(error): 
 	return await quart.render_template('extra/error.html', e=["[500] internal server error","somewhere along the way i screwed something up and there was an error in processing your request",]), 500
 
+@app.route('/trashbot')
+async def trashbot_redirect(): 
+  return redirect(url_for('elibot'), code=301)
+
+@app.route('/sona')
+async def sona_redirect(): 
+  return redirect(url_for('sona'), code=308)
+
+hyperconfig = hypercorn.config.Config()
+hyperconfig.bind = ["0.0.0.0:8080"]
+
 if __name__ == '__main__':
-	#app.run(host="0.0.0.0", port=8080, use_reloader=True)
 	asyncio.run(hypercorn.asyncio.serve(app, hyperconfig))

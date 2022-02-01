@@ -22,7 +22,9 @@
 	{%- block extra %}{% endblock %}
 </head><body{% if self.background %} style="background-image:url('static/media/backgrounds/{% block background %}{% endblock %}');"{% endif %}>
 
-<header><img src="/static/media/header.png" alt="eli header" onclick="window.location.href='/'"/></header>
+<header>
+	<img src="/static/media/header.png" alt="eli header" onclick="window.location.href='/'"/>
+</header>
 
 <nav>
 	<a href="/">home</a>
@@ -32,7 +34,9 @@
 </nav>
 
 <main>
-{%- block content %}{% endblock %}
+	{%- block content %}{% endblock %}
 </main>
+
+
 
 </body></html>

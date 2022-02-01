@@ -6,8 +6,8 @@ main > * {animation: fadein 1s;}
 
 ::selection {color: black; background: #ffaec9;}
 
-html {cursor: url('/static/media/cursor/cursorA.cur'), auto;}
-a, button {cursor: url('/static/media/cursor/cursorB.cur'), auto;}
+:root {cursor: url('/static/media/misc/cursorA.cur'), auto;}
+a, button {cursor: url('/static/media/misc/cursorB.cur'), auto;}
 
 body {
   font-family:'Lato', sans-serif; text-align: center;
@@ -19,7 +19,7 @@ header > img {width: 450px; height: auto; margin: 0px auto 4px;}
 
 nav {display: flex; padding: 0; gap: 4px;}
 nav > a {color: #fff; padding: 10px 4px; flex-grow: 1; flex-basis: 10%; text-decoration: none; font-size: 20px; font-weight: bold; overflow: hidden; transition: 0.5s}
-nav > a:hover {background-color: #000; flex-grow: 1.25; transition: 0.1s;}
+nav > a:hover, nav > a:active {background-color: #000; flex-grow: 1.25; transition: 0.1s;}
 
 main {padding: 16px 12px;}
 
@@ -34,8 +34,6 @@ p br {display: block; margin-top: 8px; content: ""}
 
 a {color: #fff; text-decoration: underline} 
 a:hover {filter: brightness(80%); transition: 0.1s}
-
-ul {text-align: justify;}
 
 img {max-width: 100%; max-height: 100%; vertical-align: middle;}
 main img {margin: 2px 0;}
