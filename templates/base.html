@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-US"><head>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-172482872-1"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-172482872-1');</script>
-	<link rel="icon" href="/static/media/icon.png" type='image/png'/>
+	<link rel="preconnect" href="https://fonts.gstatic.com/" />
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu+Mono&display=swap" rel="stylesheet"/>
 	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
+	<link rel="icon" href="/static/media/icon.png" type='image/png'/>
 	<title>{% block title %}{% endblock %}{% if self.title() %} : : {% endif %}elisttm</title>
 	<meta charset="utf-8"/>
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
@@ -23,20 +26,32 @@
 </head><body{% if self.background %} style="background-image:url('static/media/backgrounds/{% block background %}{% endblock %}');"{% endif %}>
 
 <header>
-	<img src="/static/media/header.png" alt="eli header" onclick="window.location.href='/'"/>
+	<img src="/static/media/header.png" style="width:450px; height:auto; margin:0px auto 4px;" alt="eli header" onclick="window.location.href='/'"/>
 </header>
 
 <nav>
 	<a href="/">home</a>
 	<a href="/eli">sona</a>
 	<a href="/bot">elibot</a>
-	<a href="/pages">more...</a>
+	<a href="/pages">extra</a>
 </nav>
 
-<main>
+<main style="padding:16px 12px;">
 	{%- block content %}{% endblock %}
 </main>
-
-
-
+	
 </body></html>
+
+<!--						
+	                ,
+	              _/((
+	     _.---. .'   `\
+	   .'      `     ^ T=
+	  /     \       .--'
+	 |      /       )'-.
+	 ; ,   <__..-(   '-.)
+	  \ \-.__)    ``--._)
+	   '.'-.__.-.
+	     '-...-' 
+
+-->

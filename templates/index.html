@@ -1,25 +1,61 @@
 {% extends "base.html" %}
 
+{% block extra %}
+	<style>.buttons {margin-top: 12px;} .buttons img {height: 31px; width: 88px; margin: 1px;}</style>
+	<script>function buttonHTML() {navigator.clipboard.writeText('<a href="https://elisttm.space/" target="_blank"><img src="https://elisttm.space/static/media/buttons/elisttmspace.gif"></a>');alert("copied the html to your clipboard!");}</script>
+{% endblock %}
+
 {% block background %}stars3.gif{% endblock %}
 
 {% block content %}
 
 	<h1>welcome!!!!!!!!</h1>
+		<p>hi im eli im 17 and this is my super cool and awesome website where you can find all my silly little projects and anything else i consider interesting enough to put here
+		<br>if you wish to have your own elisttm.space 88x31 button, click the preview one below to copy the html code</p>
 
-	<p>hi welcome to my silly little website this is where you can find a bunch of cool things about me and cool things that ive made
-	<br>the website is still in very very heavy development, so if something is missing please keep that in mind!</p>
+	<img src="/static/media/silly/computer-01.gif" class="minvisible" style="margin-right:32px"/>
 
-	<img src="/static/media/lavalamp.gif" alt="epic lava lamp"/>
-	<img src="/static/media/construction.gif" alt="under construction"/>
-	<img src="/static/media/computer-01.gif" alt="awesome computer"/>
+	<div class="minblock" style="display:inline-block; vertical-align:middle;">		
+		<a href="https://twitter.com/elisttm" class="button" style="background-color:#00acee;border-color:#20ccff;" target="_blank"><img src="/static/media/misc/twitter.svg" alt="twitter" height="24px" width="24px"/></a>
+		<a href="https://youtube.com/elisttm" class="button" style="background-color:#c4302b;border-color:#e4504b;" target="_blank"><img src="/static/media/misc/youtube.svg" alt="youtube" height="24px" width="24px"/></a>
+		<a href="https://steamcommunity.com/id/elisttm/" class="button" style="background-color:#2a475e;border-color:#5a677e;" target="_blank"><img src="/static/media/misc/steam.svg" alt="steam" height="24px" width="24px"/></a>
+		<a href="https://github.com/elisttm/" class="button" style="background-color:#444;border-color:#666;" target="_blank"><img src="/static/media/misc/github.svg" alt="github" height="24px" width="24px"/></a>
+	<br>
+		<a href="javascript:void(0)" onclick="buttonHTML()"><img src="/static/media/buttons/elisttmspace.gif" style="margin-top:16px;"></a>
+	</div>
+	
+	<img src="/static/media/silly/computer-01.gif" class="minvisible" style="margin-left:32px"/>
 
-	<br><a href="http://users3.smartgb.com/g/g.php?a=s&i=g36-32899-f3" rel="noopener" target="_blank"><img alt="guestbook button" title="sign my guestbook!!!!!!" src="/static/media/buttons/gb_80x40.gif" width="80" height="40"></a><br>
+	<div class="buttons">
+		<a href="http://users3.smartgb.com/g/g.php?a=s&i=g36-32899-f3" rel="noopener" target="_blank"><img src="/static/media/buttons/guestbook.gif"></a>
+		<img src="/static/media/buttons/paws.gif">
+		<a href="https://png103.neocities.org" target="_blank"><img src="/static/media/buttons/png103.gif"></a>
+		<a href="https://exo.pet/" target="_blank"><img src="/static/media/buttons/exopet.gif"></a>
+		<a href="https://machine-cat.space/" target="_blank"><img src="/static/media/buttons/machinecat.gif"></a>
+		<a href="https://districts.neocities.org/" target="_blank"><img src="/static/media/buttons/districts.gif"></a>
+		<a href="https://neocities.org/" target="_blank"><img src="/static/media/buttons/neocities-org.gif"></a>
+		<img src="/static/media/buttons/www.gif">
+		<img src="/static/media/buttons/anybrow.gif">
+		<img src="/static/media/buttons/adobesvg.gif">
+		<img src="/static/media/buttons/pngnow.gif">
+		<img src="/static/media/buttons/srgb-now.png">
+		<img src="/static/media/buttons/css.gif">
+		<a href="https://ermel.org/handcoded/" target="_blank"><img src="/static/media/buttons/handcoded.gif"></a>
+		<img src="/static/media/buttons/notepadpp.gif">
+		<img src="/static/media/buttons/made_with_windows.gif">
+		<img src="/static/media/buttons/graphicdesign.gif">
+		<img src="/static/media/buttons/year2000.gif">
+		<img src="/static/media/buttons/steam.gif">
+		<a href="https://creeperstorm75.newgrounds.com/" target="_blank"><img src="/static/media/buttons/ngbanner2.gif"></a>
+		<a href="https://www.java.com/en/" target="_blank"><img src="/static/media/buttons/java.gif"></a>
+		<a href="https://www.w3schools.com/html/" target="_blank"><img src="/static/media/buttons/w3schools.gif"></a>
+		<img src="/static/media/buttons/ubuntu.gif">
+		<img src="/static/media/buttons/debian.gif">
+		<img src="/static/media/buttons/linux-p.gif">
+		<img src="/static/media/buttons/msie.gif">
+		<img src="/static/media/buttons/netscap4.gif">
+	</div>
 
-	<a href="https://twitter.com/elisttm" class="button" style="background-color:#00acee;border-color:#20ccff;" target="_blank"><img src="/static/media/misc/twitter.svg" alt="twitter" height="24px" width="24px"/></a>
-	<a href="https://youtube.com/elisttm" class="button" style="background-color:#c4302b;border-color:#e4504b;" target="_blank"><img src="/static/media/misc/youtube.svg" alt="youtube" height="24px" width="24px"/></a>
-	<a href="https://steamcommunity.com/id/elisttm/" class="button" style="background-color:#2a475e;border-color:#5a677e;" target="_blank"><img src="/static/media/misc/steam.svg" alt="steam" height="24px" width="24px"/></a>
-	<a href="https://github.com/elisttm/" class="button" style="background-color:#444;border-color:#666;" target="_blank"><img src="/static/media/misc/github.svg" alt="github" height="24px" width="24px"/></a>
-
-	<img class="cat" src="/static/media/cat.gif" alt="silly kitty" style="margin:8px 0 -16px; width:600px;"/>
+	<br><img src="/static/media/silly/webweaving.gif">
 
 {% endblock %}
