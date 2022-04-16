@@ -1,7 +1,9 @@
-import quart, asyncio, hypercorn
-from quart import redirect, url_for
+import os, quart, asyncio, hypercorn, pymongo
+my_secret = os.environ['secret']
+from quart import redirect, url_for, request
 
 app = quart.Quart(__name__)
+#db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
 
 @app.route('/')
 async def index(): 
@@ -32,7 +34,7 @@ async def minecraft():
 	return await quart.render_template('extra/minecraft.html')
 
 @app.route('/gmod')
-async def gmod_shortcut():
+async def gmod():
 	return await quart.render_template('extra/gmod.html')
 
 @app.route('/gmodload')
@@ -40,11 +42,6 @@ async def gmod_shortcut():
 @app.route('/srcmotd')
 async def source_motd(): 
 	return await quart.render_template('extra/sourcemotd.html')
-
-@app.route('/sitemap.xml')
-@app.route('/robots.txt')
-async def static_from_root(): 
-	return await quart.send_from_directory(app.static_folder, quart.request.path[1:])
 
 @app.route('/trashbot')
 async def trashbot_redirect(): 
@@ -54,20 +51,29 @@ async def trashbot_redirect():
 async def sona_redirect(): 
   return redirect(url_for('sona'), code=308)
 
-@app.errorhandler(403)
-async def forbidden(error): 
-	return await quart.render_template('extra/error.html', e=["[403] access denied","you do not have the proper authorization to view this page"]), 403
+@app.route('/error')
+async def force_error():
+	return 0/0
+
+errors = {
+	404: ["[404] page not found",'the url youre trying to access does not exist, you probably put the link in wrong or i just messed something up'],
+	500: ["[500] internal server error","somewhere along the way there was an error processing your request; if this keeps happening, please get in contact",],
+}
 
 @app.errorhandler(404)
-async def page_not_found(error): 
-	return await quart.render_template('extra/error.html', e=["[404] page not found",'the url youre trying to access does not exist, either i screwed something up or you got the wrong link']), 404
-
 @app.errorhandler(500)
-async def internal_server(error): 
-	return await quart.render_template('extra/error.html', e=["[500] internal server error","somewhere along the way i screwed something up and there was an error in processing your request",]), 500
+async def error_handling(error):
+	return await quart.render_template('extra/error.html', errors=errors, error=error), error.code
+
+@app.route('/sitemap.xml')
+@app.route('/robots.txt')
+async def static_from_root(): 
+	return await quart.send_from_directory(app.static_folder, quart.request.path[1:])
 
 hyperconfig = hypercorn.config.Config()
 hyperconfig.bind = ["0.0.0.0:8080"]
+
+app.jinja_env.cache = {}
 
 if __name__ == '__main__':
 	asyncio.run(hypercorn.asyncio.serve(app, hyperconfig))
