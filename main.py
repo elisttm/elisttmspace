@@ -1,5 +1,4 @@
-import os, quart, asyncio, hypercorn, pymongo
-my_secret = os.environ['secret']
+import os, quart, asyncio, hypercorn
 from quart import redirect, url_for, request
 
 app = quart.Quart(__name__)
@@ -7,6 +6,7 @@ app = quart.Quart(__name__)
 
 @app.route('/')
 async def index(): 
+	#db['hitcount'].update_one({}, {"$inc":{"hits":1}})
 	return await quart.render_template('index.html')
 
 @app.route('/about')
@@ -15,11 +15,7 @@ async def about():
 
 @app.route('/eli')
 async def sona(): 
-	return await quart.render_template('sona.html')
-	
-@app.route('/bot')
-async def elibot(): 
-	return await quart.render_template('elibot.html')
+	return await quart.render_template('sona.html')	
 
 @app.route('/pages')
 async def pagelist(): 
@@ -28,6 +24,10 @@ async def pagelist():
 @app.route('/pack')
 async def pack():
 	return await quart.render_template('pack.html')
+
+@app.route('/bot')
+async def elibot(): 
+	return await quart.render_template('elibot.html')
 
 @app.route('/minecraft')
 async def minecraft():
@@ -67,6 +67,7 @@ async def error_handling(error):
 
 @app.route('/sitemap.xml')
 @app.route('/robots.txt')
+@app.route('/favicon.ico')
 async def static_from_root(): 
 	return await quart.send_from_directory(app.static_folder, quart.request.path[1:])
 
