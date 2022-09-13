@@ -1,24 +1,51 @@
-import os, quart, asyncio, hypercorn
+import os, quart, asyncio, hypercorn, pymongo, json, datetime
+from pprint import pprint
+from markupsafe import Markup, escape
 from quart import redirect, url_for, request
 
 app = quart.Quart(__name__)
-#db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
+db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
+dba = db['analytics']
+
+print(db['hitcount'].find_one({})['hits'])
+
+def is_crawler(headers):
+	return "elisttm.space" not in str(headers.get("Host")) or "bot" in str(headers.get("User-Agent")).lower() or "crawl" in str(headers.get("User-Agent")).lower() or headers.get("Accept") == None
+
+@app.after_request 
+async def after_request_callback(response):
+	try:
+		time = datetime.datetime.utcnow()
+		print(time.strftime("%m-%d-%y %I:%M:%S %p"))
+		if not is_crawler(request.headers) and "static" not in request.path and "." not in request.path:
+			headers = {x:request.headers[x] for x in ["Date","Referer","User-Agent","Sec-Ch-Ua","Sec-Ch-Ua-Platform","X-Forwarded-For"] if x in request.headers}
+			headers['date'] = time
+			headers['path'] = request.path
+			dba.insert_one(headers)
+			print(headers)
+		else:
+			print("the following request was blocked")
+		print(request.path,"\n",request.headers)
+		print('')
+	except Exception as e:
+		print(e)
+	return response
 
 @app.route('/')
 async def index(): 
-	#db['hitcount'].update_one({}, {"$inc":{"hits":1}})
-	return await quart.render_template('index.html')
+	hits = db['hitcount'].find_one_and_update({}, {"$inc":{"hits":1}})['hits']+1 if not is_crawler(request.headers) else db['hitcount'].find_one({})['hits']
+	return await quart.render_template('index.html', hits=hits)
 
 @app.route('/about')
-async def about(): 
+async def about():
 	return await quart.render_template('about.html')
 
 @app.route('/eli')
-async def sona(): 
+async def sona():
 	return await quart.render_template('sona.html')	
 
 @app.route('/pages')
-async def pagelist(): 
+async def pagelist():
 	return await quart.render_template('pages.html')
 
 @app.route('/pack')
@@ -26,8 +53,8 @@ async def pack():
 	return await quart.render_template('pack.html')
 
 @app.route('/bot')
-async def elibot(): 
-	return await quart.render_template('elibot.html')
+async def sillybot():
+	return await quart.render_template('bot.html')
 
 @app.route('/minecraft')
 async def minecraft():
@@ -45,7 +72,7 @@ async def source_motd():
 
 @app.route('/trashbot')
 async def trashbot_redirect(): 
-  return redirect(url_for('elibot'), code=301)
+  return redirect(url_for('sillybot'), code=301)
 
 @app.route('/sona')
 async def sona_redirect(): 
@@ -63,7 +90,9 @@ errors = {
 @app.errorhandler(404)
 @app.errorhandler(500)
 async def error_handling(error):
-	return await quart.render_template('extra/error.html', errors=errors, error=error), error.code
+	response = quart.Response(await quart.render_template('extra/error.html', errors=errors, error=error), error.code)
+	response.headers.set("X-Robots-Tag", "noindex")
+	return response
 
 @app.route('/sitemap.xml')
 @app.route('/robots.txt')
@@ -73,7 +102,6 @@ async def static_from_root():
 
 hyperconfig = hypercorn.config.Config()
 hyperconfig.bind = ["0.0.0.0:8080"]
-
 app.jinja_env.cache = {}
 
 if __name__ == '__main__':

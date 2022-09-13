@@ -2,11 +2,9 @@
 
 {% block extra %}
 	<style>
-		.socials > a > img {width: 31px; height: 31px; margin: 2px;}
-		.buttons {margin: 10px 0;}
-		.buttons img {width: 88px; height: 31px; margin: 2px 0;}
-		.yesterweb {font-size: 12px;}
-		.yesterweb > a {text-decoration: none; color: limegreen; margin: 0 2px;}
+		.socials {margin: 4px 32px 0;} .socials span {display: inline-block; width: 31px; height: 31px; margin: 2px;}
+		.buttons {margin: 8px 0;} .buttons img {width: 88px; height: 31px; margin: 2px 0;}
+		.yesterweb {font-size: 0.8em; margin: 20px 0 0 0;} .yesterweb > a {text-decoration: none; color: limegreen; margin: 0 2px;}
 	</style>
 {% endblock %}
 
@@ -15,58 +13,54 @@
 {% block content %}
 
 	<h1>welcome!!!!!!!!</h1>
-		<p>hi im eli this is my super cool and awesome website where you can find all my silly little projects and anything else i consider interesting enough to put here</p>
-	
-	<img src="/static/img/silly/computer.gif" loading="lazy" class="minvisible" width="100" height="100" style="margin-right:32px"/>
+		<p>hi im eli welcome to my very cool very silly and awesome website where you can find my silly projects and anything else i consider interesting enough to put here
+		<br>you are visitor #{{ hits }}!</p>
+
+	<img src="/static/img/silly/computer.gif" alt="" class="mv" width="100" height="100" loading="lazy"/>
 
 	<div class="inline">
 		<div class="socials">
-			<a href="https://twitter.com/elisttm"><img src="/static/img/dummy.gif" style="background:url(/static/img/socials.png) 0 0"/></a>
-			<a href="https://youtube.com/elisttm"><img src="/static/img/dummy.gif" style="background:url(/static/img/socials.png) -31px 0"/></a>
-			<a href="https://steamcommunity.com/id/elisttm/"><img src="/static/img/dummy.gif" style="background:url(/static/img/socials.png) -62px 0"/></a>
-			<a href="https://github.com/elisttm/"><img src="/static/img/dummy.gif" style="background:url(/static/img/socials.png) -93px 0"/></a>
+			<a href="https://twitter.com/elisttm"><span style="background:url(/static/img/socials.png) 0 0"></span></a>
+			<a href="https://youtube.com/elisttm"><span style="background:url(/static/img/socials.png) -31px 0"></span></a>
+			<a href="https://steamcommunity.com/id/elisttm/"><span style="background:url(/static/img/socials.png) -62px 0"></span></a>
+			<a href="https://github.com/elisttm/"><span style="background:url(/static/img/socials.png) -93px 0"></span></a>
 		</div>
 	<br>
-		<a href="https://elisttm.space/"><img src="/static/img/88x31/elisttmspace.gif" height="31" width="88"></a>
+		<img src="/static/img/88x31/elisttmspace.gif" alt="" width="88" height="31">
 	</div>
 	
-	<img src="/static/img/silly/computer.gif" loading="lazy" class="minvisible" width="100" height="100" style="margin-left:32px"/>
+	<img src="/static/img/silly/computer.gif" alt="" class="mv" width="100" height="100" loading="lazy"/>
 
 	<div class="buttons">
-		<a href="http://users3.smartgb.com/g/g.php?a=s&i=g36-32899-f3" rel="noopener"><img src="/static/img/88x31/guestbook.gif"></a>
-		<img src="/static/img/88x31/paws.gif">
-		<a href="https://png103.neocities.org"><img src="/static/img/88x31/png103.gif"></a>
-		<a href="https://exo.pet/"><img src="/static/img/88x31/exopet.gif"></a>
-		<a href="https://machine-cat.space/"><img src="/static/img/88x31/machinecat.gif"></a>
-		<a href="https://districts.neocities.org/"><img src="/static/img/88x31/districts.gif"></a>
-		<a href="https://sadgrl.online/"><img src="/static/img/88x31/sadgrlonline.gif"></a>
-		<a href="https://99gifshop.neocities.org/"><img src="/static/img/88x31/99gifshop.gif"></a>
-		<a href="https://kuting.neocities.org/"><img src="/static/img/88x31/kutiiing8831.gif"></a>
-		<a href="https://neocities.org/"><img src="/static/img/88x31/neocities-org.gif"></a>
-		<a href="https://creeperstorm75.newgrounds.com/"><img src="/static/img/88x31/ngbanner.gif"></a>
-		<img src="/static/img/88x31/steam.gif">
-		<!--img src="/static/img/88x31/pngnow.gif"-->
-		<img src="/static/img/88x31/css.gif">
-		<img src="/static/img/88x31/notepadpp.gif">
-		<img src="/static/img/88x31/made_with_windows.gif">
-		<img src="/static/img/88x31/webdesign.gif">
-		<img src="/static/img/88x31/year2000.gif">
-		<a href="https://ermel.org/handcoded/"><img src="/static/img/88x31/handcoded.gif"></a>
-		<a href="https://www.w3schools.com/html/"><img src="/static/img/88x31/w3schools.gif"></a>
-		<img src="/static/img/88x31/ubuntu.gif">
-		<img src="/static/img/88x31/debian.gif">
-		<img src="/static/img/88x31/linux-p.gif">
-		<img src="/static/img/88x31/anybrow.gif">
-		<img src="/static/img/88x31/www.gif">
+		<a href="http://users3.smartgb.com/g/g.php?a=s&i=g36-32899-f3" rel="noopener"><img src="/static/img/88x31/guestbook.gif" alt=""/></a>
+		<img src="/static/img/88x31/paws.gif" alt=""/>
+		<a href="https://neocities.org/"><img src="/static/img/88x31/neocities-org.gif" alt=""/></a>
+		<a href="https://png103.neocities.org"><img src="/static/img/88x31/png103.gif" alt=""/></a>
+		<a href="https://exo.pet/"><img src="/static/img/88x31/exopet.gif" alt=""/></a>
+		<a href="https://machine-cat.space/"><img src="/static/img/88x31/machinecat.gif" alt=""/></a>
+		<a href="https://districts.neocities.org/"><img src="/static/img/88x31/districts.gif" alt=""/></a>
+		<a href="https://sadgrl.online/"><img src="/static/img/88x31/sadgrlonline.gif" alt=""/></a>
+		<a href="https://kuting.neocities.org/"><img src="/static/img/88x31/kutiiing8831.gif" alt=""/></a>
+		<a href="https://swiftyshq.neocities.org/"><img src="/static/img/88x31/aff3.gif" alt=""/></a>
+		<a href="https://uncannyvalley.neocities.org/"><img src="/static/img/88x31/uncanny.gif" alt=""/></a>
+		<a href="https://tcrf.net/"><img src="/static/img/88x31/tcrf.gif" alt=""/></a>
+		<a href="https://ermel.org/handcoded/"><img src="/static/img/88x31/handcoded.gif" alt=""/></a>
+		<img src="/static/img/88x31/w3schools.gif" alt=""/>
+		<img src="/static/img/88x31/webdesign.gif" alt=""/>
+		<img src="/static/img/88x31/notepadpp.gif" alt=""/>
+		<img src="/static/img/88x31/made_with_windows.gif" alt=""/>
+		<img src="/static/img/88x31/linux-p.gif" alt=""/>
+		<img src="/static/img/88x31/anybrow.gif" alt=""/>
+		<img src="/static/img/88x31/www.gif" alt=""/>
 	</div>
 
+		<a href="https://512kb.club/#100"><img src="/static/img/88x31/512.png" alt=""/></a>
+
 	<br><p class="yesterweb">
-		<a href="https://webring.yesterweb.org/noJS/index.php?d=rand&url=https://elisttm.space/">Random</a>
-		//
+		<a href="https://webring.yesterweb.org/noJS/index.php?d=rand&url=https://elisttm.space/">Random</a> // 
 		<a href="https://webring.yesterweb.org/noJS/index.php?d=prev&url=https://elisttm.space/">&lt;&lt;</a>
 		<a href="https://yesterweb.org/webring/">Yesterweb</a>
-		<a href="https://webring.yesterweb.org/noJS/index.php?d=next&url=https://elisttm.space/">&gt;&gt;</a>
-		//
+		<a href="https://webring.yesterweb.org/noJS/index.php?d=next&url=https://elisttm.space/">&gt;&gt;</a> //
 		<a href="https://yesterweb.org/webring/members.html">Members</a>
 	</p>
 		

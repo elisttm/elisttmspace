@@ -3,28 +3,27 @@
 <html lang="en-US"><head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
 	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
 	<link rel="icon" href="/static/img/favicon.png" type='image/png'/>
-	<title>{% block title %}{% endblock %}{% if not self.title() %}elisttm{% endif %}</title>
-	<meta name="description" content="hello im niche twitter micro celebrity elisttm and this is my very cool and awesome personal homepage and hub where i put all my silly little things"/>
+	<title>{% block title %}elisttm{% endblock %}</title>
+	<meta name="description" content="{% block desc %}my very silly and very cool personal homepage for all my silly little things{% endblock %}"/>
 	<meta name="theme-color" content="#ffaec9"/>
 	<meta property="og:type" content="website"/>
 	<meta property="og:site_name" content="elisttm"/>
-	<meta property="og:title" content="{% block og_title %}elisttm.space{% endblock %}"/>
-	<meta property="og:description" content="{% block og_desc %}my awesome and very cool website for all my silly things{% endblock %}"/>
+	<meta property="og:title" content="{{ self.title() }}{% if not self.title() %}elisttm.space{% endif %}"/>
+	<meta property="og:description" content="{{ self.desc() }}"/>
 	{%- block extra %}{% endblock %}
 </head><body style="background:#000{% if self.background %} url('static/img/bg/{% block background %}{% endblock %}');{% endif %}">
 
 <header>
-	<a href="/"><img src="/static/img/banner.png" width="450px" height="auto" style="margin:0px auto 4px;"/></a>
+	<a href="/"><img src="/static/img/banner.png" alt="" width="450"/></a>
 </header>
 	
 <nav>
 	<a href="/">home</a>
 	<a href="/about">about me</a>
 	<a href="/eli">my sona</a>
-	<a href="/bot">eli bot</a>
+	<a href="/bot">sillybot</a>
 	<a href="/pages">pages</a>
 </nav>
 	
@@ -37,13 +36,13 @@
 <!--						
 	                ,
 	              _/((
-	     _.---. .'   `\
-	   .'      `     ^ T=
-	  /     \       .--'
+	      .- -. .'    \
+	   .'      `     * &
+	  /     \       . -'
 	 |      /       )'-.
 	 ; ,   <__..-(   '-.)
-	  \ \-.__)    ``--._)
-	   '.'-.__.-.
-	     '-...-' 
+	  \ \-.__)    ``-._)
+	   ' `.__.-.
+	     `-...-' 
 			the creature
 -->
