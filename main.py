@@ -1,40 +1,36 @@
-import os, quart, asyncio, hypercorn, pymongo, json, datetime
-from pprint import pprint
-from markupsafe import Markup, escape
+import os, quart, asyncio, hypercorn, pymongo, time
+#from markupsafe import Markup, escape
 from quart import redirect, url_for, request
 
 app = quart.Quart(__name__)
 db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
-dba = db['analytics']
+
+visitors = {}
 
 print(db['hitcount'].find_one({})['hits'])
 
-def is_crawler(headers):
-	return "elisttm.space" not in str(headers.get("Host")) or "bot" in str(headers.get("User-Agent")).lower() or "crawl" in str(headers.get("User-Agent")).lower() or headers.get("Accept") == None
+def is_crawler(request):
+	return "elisttm.space" not in request.url or request.headers.get("X-Is-Bot","true") == "true"
 
+async def analytics():
+	print(request.path,"\n",request.headers)
+	if "elisttm.space" in request.url and request.headers.get("X-Is-Bot","true") == "false":
+		if "elisttm.space" not in request.headers.get("Referer","elisttm.space"):
+			db['referers'].insert_one({"referer":request.headers.get("Referer"),"path":request.path})
+		ip = request.headers.get("X-Forwarded-For",None); ts = int(time.time())
+		if ip and (ip not in visitors or (ip in visitors and visitors[ip]+3600 < ts)):
+			print(db['hitcount'].find_one_and_update({}, {"$inc":{"hits":1}})['hits'])
+			visitors[ip] = ts
+			print(visitors)
+			
 @app.after_request 
 async def after_request_callback(response):
-	try:
-		time = datetime.datetime.utcnow()
-		print(time.strftime("%m-%d-%y %I:%M:%S %p"))
-		if not is_crawler(request.headers) and "static" not in request.path and "." not in request.path:
-			headers = {x:request.headers[x] for x in ["Date","Referer","User-Agent","Sec-Ch-Ua","Sec-Ch-Ua-Platform","X-Forwarded-For"] if x in request.headers}
-			headers['date'] = time
-			headers['path'] = request.path
-			dba.insert_one(headers)
-			print(headers)
-		else:
-			print("the following request was blocked")
-		print(request.path,"\n",request.headers)
-		print('')
-	except Exception as e:
-		print(e)
+	app.add_background_task(analytics)
 	return response
 
 @app.route('/')
 async def index(): 
-	hits = db['hitcount'].find_one_and_update({}, {"$inc":{"hits":1}})['hits']+1 if not is_crawler(request.headers) else db['hitcount'].find_one({})['hits']
-	return await quart.render_template('index.html', hits=hits)
+	return await quart.render_template('index.html', hits=db['hitcount'].find_one({})['hits'])
 
 @app.route('/about')
 async def about():
