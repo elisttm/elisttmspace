@@ -1,70 +1,69 @@
-import os, quart, asyncio, hypercorn, pymongo, time
-#from markupsafe import Markup, escape
-from quart import redirect, url_for, request
+import os, asyncio, quart, hypercorn
+from quart import request, redirect, url_for, render_template, send_from_directory
 
 app = quart.Quart(__name__)
-db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
+#db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
 
-visitors = {}
+#visitors = {}
 
-print(db['hitcount'].find_one({})['hits'])
-
-def is_crawler(request):
-	return "elisttm.space" not in request.url or request.headers.get("X-Is-Bot","true") == "true"
-
-async def analytics():
-	print(request.path,"\n",request.headers)
-	if "elisttm.space" in request.url and request.headers.get("X-Is-Bot","true") == "false":
-		if "elisttm.space" not in request.headers.get("Referer","elisttm.space"):
-			db['referers'].insert_one({"referer":request.headers.get("Referer"),"path":request.path})
-		ip = request.headers.get("X-Forwarded-For",None); ts = int(time.time())
-		if ip and (ip not in visitors or (ip in visitors and visitors[ip]+3600 < ts)):
-			print(db['hitcount'].find_one_and_update({}, {"$inc":{"hits":1}})['hits'])
-			visitors[ip] = ts
-			print(visitors)
+#async def analytics():
+#	try:
+#		print("\n",request.path,"\n",request.headers)
+#		if "elisttm.space" not in request.url or crawlerdetect.CrawlerDetect(request.headers).isCrawler() or "bot" in request.headers.get("User-Agent","").lower():
+#			return
+#		timestamp = int(time.time())
+#		referer = request.headers.get("Referer")
+#		ip = request.headers.get("X-Forwarded-For")
+#		if referer and "elisttm.space" not in referer and "t.co" not in referer:
+#			db["stats"].update_one({"_id":"referers"}, {"$addToSet":{"urls":referer}})	
+#		if ip and ("static" not in request.path and "." not in request.path) and (ip not in visitors or visitors[ip]+3600 < timestamp):
+#			visitors[ip] = timestamp
+#			print(db['stats'].find_one_and_update({"_id":"hits"}, {"$inc":{"hits":1}})['hits'], visitors)
+#	except Exception as e:
+#		print(e)
 			
-@app.after_request 
-async def after_request_callback(response):
-	app.add_background_task(analytics)
-	return response
+#@app.after_request 
+#async def after_request_callback(response):
+#	app.add_background_task(analytics)
+#	return response
 
 @app.route('/')
 async def index(): 
-	return await quart.render_template('index.html', hits=db['hitcount'].find_one({})['hits'])
+	return await render_template('index.html')#, hits=db['stats'].find_one({"_id":"hits"})['hits'])
 
 @app.route('/about')
 async def about():
-	return await quart.render_template('about.html')
+	return await render_template('about.html')
 
 @app.route('/eli')
 async def sona():
-	return await quart.render_template('sona.html')	
+	return await render_template('sona.html')	
 
 @app.route('/pages')
 async def pagelist():
-	return await quart.render_template('pages.html')
+	return await render_template('pages.html')
 
 @app.route('/pack')
 async def pack():
-	return await quart.render_template('pack.html')
+	return await render_template('pack.html')
 
 @app.route('/bot')
 async def sillybot():
-	return await quart.render_template('bot.html')
+	return await render_template('bot.html')
 
 @app.route('/minecraft')
 async def minecraft():
-	return await quart.render_template('extra/minecraft.html')
+	return await render_template('extra/minecraft.html')
 
 @app.route('/gmod')
 async def gmod():
-	return await quart.render_template('extra/gmod.html')
+	return await render_template('extra/gmod.html')
 
 @app.route('/gmodload')
 @app.route('/tf2motd')
 @app.route('/srcmotd')
 async def source_motd(): 
-	return await quart.render_template('extra/sourcemotd.html')
+	return await render_template('extra/sourcemotd.html')
 
 @app.route('/trashbot')
 async def trashbot_redirect(): 
@@ -86,7 +85,7 @@ errors = {
 @app.errorhandler(404)
 @app.errorhandler(500)
 async def error_handling(error):
-	response = quart.Response(await quart.render_template('extra/error.html', errors=errors, error=error), error.code)
+	response = quart.Response(await render_template('extra/error.html', errors=errors, error=error), error.code)
 	response.headers.set("X-Robots-Tag", "noindex")
 	return response
 
@@ -94,7 +93,7 @@ async def error_handling(error):
 @app.route('/robots.txt')
 @app.route('/favicon.ico')
 async def static_from_root(): 
-	return await quart.send_from_directory(app.static_folder, quart.request.path[1:])
+	return await send_from_directory(app.static_folder, request.path[1:])
 
 hyperconfig = hypercorn.config.Config()
 hyperconfig.bind = ["0.0.0.0:8080"]

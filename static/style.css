@@ -2,7 +2,6 @@
 main > * {animation: fadein 1s; transition: 0.5s;}
 
 ::selection {color: #000; background: #ffaec9;}
-
 :root {cursor: url('/static/img/cursor-default.gif'), auto; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; -webkit-font-smoothing: subpixel-antialiased; }
 
 body {font-family: sans-serif; text-align: center; color:#fff; padding: 4px 0; margin: 0 auto; width: 600px; }
