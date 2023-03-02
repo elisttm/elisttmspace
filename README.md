@@ -1,5 +1,5 @@
 # elisttm.space
 
-this is the source code to my website used on [elisttm.space](https://elisttm.space) that runs on the quart python library
+[my silly website](https://elisttm.space) that runs on the python quart web framework
 
-all of the html and css is hand typed so please dont scrape any of my code and claim it as your own
+all of the html and css is hand typed so please dont scrape any of my code and claim it as your own :3 ty
