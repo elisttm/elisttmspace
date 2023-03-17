@@ -2,34 +2,10 @@ import os, asyncio, quart, hypercorn
 from quart import request, redirect, url_for, render_template, send_from_directory
 
 app = quart.Quart(__name__)
-#db = pymongo.MongoClient(os.environ['mongo'])['elisttmspace']
-
-#visitors = {}
-
-#async def analytics():
-#	try:
-#		print("\n",request.path,"\n",request.headers)
-#		if "elisttm.space" not in request.url or crawlerdetect.CrawlerDetect(request.headers).isCrawler() or "bot" in request.headers.get("User-Agent","").lower():
-#			return
-#		timestamp = int(time.time())
-#		referer = request.headers.get("Referer")
-#		ip = request.headers.get("X-Forwarded-For")
-#		if referer and "elisttm.space" not in referer and "t.co" not in referer:
-#			db["stats"].update_one({"_id":"referers"}, {"$addToSet":{"urls":referer}})	
-#		if ip and ("static" not in request.path and "." not in request.path) and (ip not in visitors or visitors[ip]+3600 < timestamp):
-#			visitors[ip] = timestamp
-#			print(db['stats'].find_one_and_update({"_id":"hits"}, {"$inc":{"hits":1}})['hits'], visitors)
-#	except Exception as e:
-#		print(e)
-			
-#@app.after_request 
-#async def after_request_callback(response):
-#	app.add_background_task(analytics)
-#	return response
 
 @app.route('/')
 async def index(): 
-	return await render_template('index.html')#, hits=db['stats'].find_one({"_id":"hits"})['hits'])
+	return await render_template('index.html')
 
 @app.route('/about')
 async def about():

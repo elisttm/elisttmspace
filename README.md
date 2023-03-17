@@ -1,5 +1,7 @@
 # elisttm.space
 
-[my silly website](https://elisttm.space) that runs on the python quart web framework
+my personal homepage that runs on the python quart web framework
 
-all of the html and css is hand typed so please dont scrape any of my code and claim it as your own :3 ty
+all code is hand typed, you are free to learn from it but do not rip it off pls and ty :3 
+
+[hosted site can be found here](https://elisttm.space)

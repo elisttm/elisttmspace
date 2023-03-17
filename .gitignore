@@ -1,7 +1,4 @@
-notes
-storage
-.replit
-.breakpoints
+.notes
 **/__pycache__/
 poetry.lock
 pyproject.toml
