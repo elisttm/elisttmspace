@@ -1,26 +1,31 @@
 @keyframes fadein {from {opacity: 0;} to {opacity: 1;}}
 main > * {animation: fadein 1s; transition: 0.5s;}
+* {box-sizing: border-box;}
 
 ::selection {color: #000; background: #ffaec9;}
-:root {cursor: url('/static/img/cursor-default.gif'), auto; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; -webkit-font-smoothing: subpixel-antialiased; }
+:root {cursor: url('/static/img/cursor-default.gif'), auto; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; -webkit-font-smoothing: subpixel-antialiased;}
 
-body {font-family: sans-serif; text-align: center; color:#fff; padding: 4px 0; margin: 0 auto; width: 600px; }
+body {font-family: sans-serif; text-align: center; color:#fff; padding: 4px 0; margin: 0 auto; width: 600px;}
 
-header, main, nav {margin: 4px 0 0; overflow: hidden; display: block;}
+header, main, nav {margin: 4px 0 0; overflow: hidden;}
 nav {display: flex; padding: 0; gap: 4px; justify-content: space-between;}
 nav > a {font-family: "Trebuchet MS"; padding: 8px 2px; flex-basis: 20%; text-decoration: none; font-weight: bold; overflow: hidden; white-space: nowrap;}
 nav > a:hover, nav > a:active {background-color: #000; transition: 0.5s;}
 main, nav > a {background-color: rgba(0,0,0,0.8); border: 4px outset #fff;}
-main {padding: 16px;}
+main {padding: 16px 0 32px;}
 
 h1, h2, h3 {font-family: monospace}
-h1, h2, h3, p {margin: 0 48px 10px;}
+h1, h2, h3, p {margin: 12px 64px 16px;}
 p {text-align: justify; text-align-last: center; word-spacing: 2px;}
 p br {display: block; margin-top: 8px; content: ""}
-a {color: #fff; text-decoration: underline; cursor: url('/static/img/cursor-pointer.gif'), pointer;} 
+a {color: #fff; text-decoration: underline; cursor: url('/static/img/cursor-pointer.gif'), pointer;}
 a:hover {filter: brightness(80%); transition: 0.1s}
 
-img {max-height: 100%; max-width: 100%; aspect-ratio: attr(width) / attr(height); margin: 1px 0; border: 0;}
+ul {display: inline-block; text-align: left;}
+li {margin-bottom: 16px;}
+
+img {max-height: 100%; max-width: 100%; aspect-ratio: attr(width) / attr(height); }
+main img {margin: 1px 0; border: 0;}
 .inline, img {display: inline-block; vertical-align: middle; }
 
 .button {display: inline-block; border: 4px outset #bbb; background-color: #ddd; color: #000; font-size: 0.9em; text-decoration: none; padding: 4px; margin: 8px 2px}
@@ -29,10 +34,12 @@ img {max-height: 100%; max-width: 100%; aspect-ratio: attr(width) / attr(height)
 
 @media screen and (max-width: 600px) {
 	body {width: 100vw;}
-	header, nav, main {margin: 4px 4px 0}
+	header, nav, main {margin: 4px 8px 0}
 	nav {flex-wrap: wrap;}
-	nav > a {flex-basis: 25%; flex-grow: 1; padding: 6px 2px} nav > a[href="/"], nav > a[href="/about"] {flex-basis: 40%;}
-	h1, h2, h3, p {margin-left: 8px; margin-right: 8px;}
+	nav > a {flex-basis: 25%; flex-grow: 1; padding: 6px 2px}
+	nav > a[href="/"],
+	nav > a[href="/about"] {flex-basis: 40%;}
+	h1, h2, h3, p {margin-left: 24px; margin-right: 24px;}
 	.mb {display: block;}
 	.mv {display: none;}
 }

@@ -4,7 +4,7 @@ from quart import request, redirect, url_for, render_template, send_from_directo
 app = quart.Quart(__name__)
 
 @app.route('/')
-async def index(): 
+async def index():
 	return await render_template('index.html')
 
 @app.route('/about')
@@ -13,41 +13,47 @@ async def about():
 
 @app.route('/eli')
 async def sona():
-	return await render_template('sona.html')	
+	return await render_template('eli.html')
 
-@app.route('/pages')
-async def pagelist():
-	return await render_template('pages.html')
+@app.route('/servers')
+async def servers():
+	return await render_template('servers.html')
 
-@app.route('/pack')
-async def pack():
-	return await render_template('pack.html')
+@app.route('/gmod')
+async def gmod():
+	return await render_template('servers/gmod.html')
+
+@app.route('/tf2')
+async def tf2():
+	return await render_template('servers/tf2.html')
+
+@app.route('/minecraft')
+async def minecraft():
+	return await render_template('servers/minecraft.html')
 
 @app.route('/bot')
 async def sillybot():
 	return await render_template('bot.html')
 
-@app.route('/minecraft')
-async def minecraft():
-	return await render_template('extra/minecraft.html')
+@app.route('/pack')
+async def pack():
+	return await render_template('pack.html')
 
-@app.route('/gmod')
-async def gmod():
-	return await render_template('extra/gmod.html')
+@app.route('/pages')
+async def pagelist():
+	return await render_template('pages.html')
 
-@app.route('/gmodload')
-@app.route('/tf2motd')
-@app.route('/srcmotd')
-async def source_motd(): 
-	return await render_template('extra/sourcemotd.html')
+@app.route('/motd')
+async def htmlmotd():
+	return await render_template('etc/motd.html')
 
 @app.route('/trashbot')
-async def trashbot_redirect(): 
-  return redirect(url_for('sillybot'), code=301)
+async def trashbot_redirect():
+	return redirect(url_for('sillybot'), code=301)
 
 @app.route('/sona')
-async def sona_redirect(): 
-  return redirect(url_for('sona'), code=308)
+async def sona_redirect():
+	return redirect(url_for('sona'), code=308)
 
 @app.route('/error')
 async def force_error():
@@ -61,18 +67,18 @@ errors = {
 @app.errorhandler(404)
 @app.errorhandler(500)
 async def error_handling(error):
-	response = quart.Response(await render_template('extra/error.html', errors=errors, error=error), error.code)
+	response = quart.Response(await render_template('etc/error.html', errors=errors, error=error), error.code)
 	response.headers.set("X-Robots-Tag", "noindex")
 	return response
 
 @app.route('/sitemap.xml')
 @app.route('/robots.txt')
 @app.route('/favicon.ico')
-async def static_from_root(): 
+async def static_from_root():
 	return await send_from_directory(app.static_folder, request.path[1:])
 
 hyperconfig = hypercorn.config.Config()
-hyperconfig.bind = ["0.0.0.0:8080"]
+hyperconfig.bind = ["0.0.0.0:7575"]
 app.jinja_env.cache = {}
 
 if __name__ == '__main__':
