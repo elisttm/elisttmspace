@@ -1,5 +1,5 @@
 .notes
-run.sh
+start.sh
 **/__pycache__/
 poetry.lock
 pyproject.toml
