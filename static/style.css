@@ -5,11 +5,11 @@ main > * {animation: fadein 1s; transition: 0.5s;}
 ::selection {color: #000; background: #ffaec9;}
 :root {cursor: url('/static/img/cursor-default.gif'), auto; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; -webkit-font-smoothing: subpixel-antialiased;}
 
-body {font-family: sans-serif; text-align: center; color:#fff; padding: 0; margin: 0 auto; width: 608px;}
+body {font-family: sans-serif; text-align: center; color: #fff; padding: 0; margin: 0 auto; width: 608px;}
 
 header, main, nav {margin: 4px 0 0; overflow: hidden;}
 nav {display: flex; padding: 0; gap: 4px; justify-content: space-between;}
-nav > a {font-family: "Trebuchet MS"; padding: 8px 2px; flex-basis: 20%; text-decoration: none; font-weight: bold; overflow: hidden; white-space: nowrap;}
+nav > a {font-family: "Trebuchet MS"; padding: 8px; flex-basis: 20%; text-decoration: none; font-weight: bold; overflow: hidden; white-space: nowrap;}
 nav > a:hover, nav > a:active {background-color: #000; transition: 0.5s;}
 main, nav > a {background-color: rgba(0,0,0,0.8); border: 4px outset #fff;}
 main {padding: 16px 0 32px;}
@@ -26,7 +26,7 @@ li {margin-bottom: 16px;}
 
 img {max-height: 100%; max-width: 100%; aspect-ratio: attr(width) / attr(height); }
 main img {margin: 1px 0; border: 0;}
-.inline, img {display: inline-block; vertical-align: middle; }
+img, span, .inline {display: inline-block; vertical-align: middle;}
 
 .button {display: inline-block; border: 4px outset #bbb; background-color: #ddd; color: #000; font-size: 0.9em; text-decoration: none; padding: 4px; margin: 8px 2px}
 .button:hover, nav > a:hover {border-style: inset}

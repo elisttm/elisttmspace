@@ -1,11 +1,14 @@
-import os, asyncio, quart, hypercorn
+import os, asyncio, quart, hypercorn, pymongo, dotenv
 from quart import request, redirect, url_for, render_template, send_from_directory
 
+dotenv.load_dotenv()
+
 app = quart.Quart(__name__)
+db = pymongo.MongoClient(os.environ["MONGO"], serverSelectionTimeoutMS=500)['elisttmspace']
 
 @app.route('/')
 async def index():
-	return await render_template('index.html')
+	return await render_template('index.html', hits=str(db['stats'].find_one_and_update({}, {"$inc":{"hits":1}})["hits"]))
 
 @app.route('/about')
 async def about():
@@ -53,7 +56,11 @@ async def trashbot_redirect():
 
 @app.route('/sona')
 async def sona_redirect():
-	return redirect(url_for('sona'), code=308)
+	return redirect(url_for('sona'), code=301)
+
+@app.route('/index.html')
+async def index_redirect():
+	return redirect(url_for('index'), code=301)
 
 @app.route('/error')
 async def force_error():
