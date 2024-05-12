@@ -5,11 +5,12 @@
 	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
 	<link rel="icon" href="/static/img/favicon.png" type='image/png'/>
 	<title>{% block title %}elisttm{% endblock %}</title>
+	<meta property="og:title" content="{{ self.title() }}{% if not self.title() %}elisttm.space{% endif %}"/>
 	<meta name="description" content="{% block desc %}my silly website for all my projects{% endblock %}"/>
 	<meta property="og:description" content="{{ self.desc() }}"/>
-	<meta property="og:title" content="{{ self.title() }}{% if not self.title() %}elisttm.space{% endif %}"/>
 	<meta property="og:site_name" content="elisttm"/>
 	<meta property="og:type" content="website"/>
+	<meta name="darkreader-lock">
 	<meta name="theme-color" content="#ffaec9"/>
 	<meta name="twitter:site" content="@elisttm"/>
 	<meta property="og:image" content="/static/img/{% block image %}logo.png{% endblock %}"/>

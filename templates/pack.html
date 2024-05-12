@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
-{% set version = "1.6.1" %}
-
 {% block title %}eli pack{% endblock %}
-{% block desc %}my custom silly minecraft resource pack{% endblock %}
+{% block desc %}my custom minecraft resource pack{% endblock %}
 
 {% block background %}dirt.png{% endblock %}
 
 {% block content %}
 
-	<h1>eli pack [v{{ version }}]</h1>
+	<h1>eli pack</h1>
 
-	<p>my silly little minecraft resource pack</p>
+	<p>
+		this is my texture pack ive been maintaining on and off since 2018. its a combination of assets i made and some i stole from other packs i like.
+		<br>the pack is designed first and foremost for the latest version of minecraft, but i have versions made specifically for pre 1.9 minecraft (labeled as "legacy")
+	</p>
 
 	<a class="button" href="https://www.mediafire.com/folder/jp16jada9oima/eli_pack" target="_blank">go to downloads</a>
 
-	<img src="/static/img/pack.jpg" alt="screenshot of the pack in use"/>
-	<p><a href="https://www.planetminecraft.com/project/presentation-4081168/">map created by pixxykilljoy</a></p>
+	<br><br><img src="/static/img/pack.png" height="350px" width="350px">
 
 {% endblock %}
