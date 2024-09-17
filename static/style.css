@@ -1,5 +1,3 @@
-@keyframes fadein {from {opacity: 0;} to {opacity: 1;}}
-main > * {animation: fadein 1s; transition: 0.5s;}
 * {box-sizing: border-box;}
 
 ::selection {color: #000; background: #ffaec9;}

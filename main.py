@@ -8,7 +8,11 @@ db = pymongo.MongoClient(os.environ["MONGO"], serverSelectionTimeoutMS=500)['eli
 
 @app.route('/')
 async def index():
-	return await render_template('index.html', hits=str(db['stats'].find_one_and_update({}, {"$inc":{"hits":1}})["hits"]))
+	try:
+		hits = str(db['stats'].find_one_and_update({}, {"$inc":{"hits":1}})["hits"])
+	except:
+		hits = None
+	return await render_template('index.html', hits=hits)
 
 @app.route('/about')
 async def about():
@@ -50,31 +54,37 @@ async def pagelist():
 async def htmlmotd():
 	return await render_template('etc/motd.html')
 
+@app.route('/index.html')
+@app.route('/home')
+async def index_redirect():
+	return redirect(url_for('index'), code=301)
+
 @app.route('/trashbot')
+@app.route('/sillybot')
+@app.route('/elibot')
 async def trashbot_redirect():
 	return redirect(url_for('sillybot'), code=301)
 
 @app.route('/sona')
+@app.route('/fursona')
 async def sona_redirect():
 	return redirect(url_for('sona'), code=301)
 
-@app.route('/index.html')
-async def index_redirect():
-	return redirect(url_for('index'), code=301)
+@app.route('/homunculus')
+async def homunculus():
+	return await send_from_directory(app.static_folder, "img/homunculus.jpg")
 
 @app.route('/error')
 async def force_error():
 	return 0/0
 
-errors = {
-	404: ["[404] page not found",'the url youre trying to access does not exist, you probably put the link in wrong or i just messed something up'],
-	500: ["[500] internal server error","somewhere along the way there was an error processing your request; if this keeps happening, please get in contact",],
-}
-
 @app.errorhandler(404)
 @app.errorhandler(500)
 async def error_handling(error):
-	response = quart.Response(await render_template('etc/error.html', errors=errors, error=error), error.code)
+	response = quart.Response(await render_template('etc/error.html', errors={
+		404: ["[404] page not found", "the url youre trying to access does not exist! you likely followed a dead link or typed something wrong"],
+		500: ["[500] internal server error", "somewhere along the way there was an error processing your request. if this keeps happening, please get in contact",],
+	}, error=error,), error.code)
 	response.headers.set("X-Robots-Tag", "noindex")
 	return response
 
