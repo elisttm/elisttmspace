@@ -5,3 +5,5 @@ start.sh
 poetry.lock
 pyproject.toml
 requirements.txt
+
+**/servers/banner-*

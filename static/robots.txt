@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow: /static/img/servers
 
 Sitemap: https://elisttm.space/sitemap.xml

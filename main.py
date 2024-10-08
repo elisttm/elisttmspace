@@ -1,16 +1,30 @@
-import os, asyncio, quart, hypercorn, pymongo, dotenv
+import os, asyncio, quart, hypercorn, pymongo, dotenv, a2s
 from quart import request, redirect, url_for, render_template, send_from_directory
+from PIL import Image, ImageFont, ImageDraw
 
 dotenv.load_dotenv()
 
 app = quart.Quart(__name__)
 db = pymongo.MongoClient(os.environ["MONGO"], serverSelectionTimeoutMS=500)['elisttmspace']
 
+is_up = True
+banrand = 0
+
+@app.before_serving
+async def startup():
+    app.add_background_task = asyncio.ensure_future(fetch_servers())
+
+@app.after_serving
+async def shutdown():
+	global is_up
+	is_up = False
+
 @app.route('/')
 async def index():
 	try:
 		hits = str(db['stats'].find_one_and_update({}, {"$inc":{"hits":1}})["hits"])
-	except:
+	except Exception as e:
+		print(e)
 		hits = None
 	return await render_template('index.html', hits=hits)
 
@@ -24,15 +38,15 @@ async def sona():
 
 @app.route('/servers')
 async def servers():
-	return await render_template('servers.html')
+	return await render_template('servers.html', br=banrand)
 
 @app.route('/gmod')
 async def gmod():
-	return await render_template('servers/gmod.html')
+	return await render_template('servers/gmod.html', br=banrand)
 
 @app.route('/tf2')
 async def tf2():
-	return await render_template('servers/tf2.html')
+	return await render_template('servers/tf2.html', br=banrand)
 
 @app.route('/minecraft')
 async def minecraft():
@@ -93,6 +107,39 @@ async def error_handling(error):
 @app.route('/favicon.ico')
 async def static_from_root():
 	return await send_from_directory(app.static_folder, request.path[1:])
+
+
+serverlist = {
+	"gmod": {"game": "gmod", "name": "eli gmod server", "port": 27015},
+	"sandbox": {"game": "gmod", "name": "eli sandbox server", "port": 27017},
+	"tf2": {"game": "tf2", "name": "eli tf2 server", "port": 27016},
+}
+
+def banner_drawer(server):
+	global banrand
+	try:
+		srv = a2s.info(("play.elisttm.space", serverlist[server]['port']))
+		banrand = str(srv.ping)[-8:]
+		img = Image.open(f"static/img/servers/template-{serverlist[server]['game']}.png")
+		draw = ImageDraw.Draw(img)
+		draw.text((160, 1), f"{srv.player_count}/{srv.max_players}", "white", ImageFont.truetype("static/Verdana-Bold.ttf", 11))
+		draw.text((160, 15.5), (srv.map_name[:16] + " ...") if len(srv.map_name) > 16 else srv.map_name, "white", ImageFont.truetype("static/Arial.ttf", 10))
+	except Exception as e:
+		print(e)
+		banrand = "offline"
+		img = Image.open("static/img/servers/template-offline.png")
+		draw = ImageDraw.Draw(img)
+	draw.text((34, 15.5), f"play.elisttm.space:{serverlist[server]['port']}", "white", ImageFont.truetype("static/Arial.ttf", 10))
+	draw.text((34, 1), serverlist[server]['name'], "white", ImageFont.truetype("static/Verdana-Bold.ttf", 11))
+	img.save(f"static/img/servers/banner-{server}.png")
+
+async def fetch_servers():
+	while is_up:
+		for k in serverlist:
+			banner_drawer(k)
+		print("server banners refreshed!")
+		await asyncio.sleep(200)
+
 
 hyperconfig = hypercorn.config.Config()
 hyperconfig.bind = ["0.0.0.0:7575"]
