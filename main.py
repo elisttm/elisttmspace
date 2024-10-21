@@ -1,11 +1,12 @@
-import os, asyncio, quart, hypercorn, pymongo, dotenv, a2s
+import dotenv, asyncio, quart, hypercorn, sqlite3, a2s, time
 from quart import request, redirect, url_for, render_template, send_from_directory
 from PIL import Image, ImageFont, ImageDraw
 
 dotenv.load_dotenv()
 
 app = quart.Quart(__name__)
-db = pymongo.MongoClient(os.environ["MONGO"], serverSelectionTimeoutMS=500)['elisttmspace']
+db = sqlite3.connect("data.db")
+cur = db.cursor()
 
 is_up = True
 banrand = 0
@@ -18,15 +19,14 @@ async def startup():
 async def shutdown():
 	global is_up
 	is_up = False
+	db.close()
 
 @app.route('/')
 async def index():
-	try:
-		hits = str(db['stats'].find_one_and_update({}, {"$inc":{"hits":1}})["hits"])
-	except Exception as e:
-		print(e)
-		hits = None
-	return await render_template('index.html', hits=hits)
+	cur.execute("UPDATE HITS SET hits = hits + 1")
+	db.commit()
+	cur.execute("SELECT hits FROM HITS")
+	return await render_template('index.html', hits=cur.fetchone()[0])
 
 @app.route('/about')
 async def about():
@@ -64,6 +64,10 @@ async def pack():
 async def pagelist():
 	return await render_template('pages.html')
 
+@app.route('/credits')
+async def credits():
+	return await render_template('credits.html')
+
 @app.route('/motd')
 async def htmlmotd():
 	return await render_template('etc/motd.html')
@@ -88,10 +92,6 @@ async def sona_redirect():
 async def homunculus():
 	return await send_from_directory(app.static_folder, "img/homunculus.jpg")
 
-@app.route('/error')
-async def force_error():
-	return 0/0
-
 @app.errorhandler(404)
 @app.errorhandler(500)
 async def error_handling(error):
@@ -108,38 +108,32 @@ async def error_handling(error):
 async def static_from_root():
 	return await send_from_directory(app.static_folder, request.path[1:])
 
-
 serverlist = {
 	"gmod": {"game": "gmod", "name": "eli gmod server", "port": 27015},
 	"sandbox": {"game": "gmod", "name": "eli sandbox server", "port": 27017},
 	"tf2": {"game": "tf2", "name": "eli tf2 server", "port": 27016},
 }
 
-def banner_drawer(server):
-	global banrand
-	try:
-		srv = a2s.info(("play.elisttm.space", serverlist[server]['port']))
-		banrand = str(srv.ping)[-8:]
-		img = Image.open(f"static/img/servers/template-{serverlist[server]['game']}.png")
-		draw = ImageDraw.Draw(img)
-		draw.text((160, 1), f"{srv.player_count}/{srv.max_players}", "white", ImageFont.truetype("static/Verdana-Bold.ttf", 11))
-		draw.text((160, 15.5), (srv.map_name[:16] + " ...") if len(srv.map_name) > 16 else srv.map_name, "white", ImageFont.truetype("static/Arial.ttf", 10))
-	except Exception as e:
-		print(e)
-		banrand = "offline"
-		img = Image.open("static/img/servers/template-offline.png")
-		draw = ImageDraw.Draw(img)
-	draw.text((34, 15.5), f"play.elisttm.space:{serverlist[server]['port']}", "white", ImageFont.truetype("static/Arial.ttf", 10))
-	draw.text((34, 1), serverlist[server]['name'], "white", ImageFont.truetype("static/Verdana-Bold.ttf", 11))
-	img.save(f"static/img/servers/banner-{server}.png")
-
 async def fetch_servers():
+	global banrand
 	while is_up:
-		for k in serverlist:
-			banner_drawer(k)
+		for server in serverlist:
+			try:
+				srv = a2s.info(("play.elisttm.space", serverlist[server]['port']))
+				img = Image.open(f"static/img/servers/template-{serverlist[server]['game']}.png")
+				draw = ImageDraw.Draw(img)
+				draw.text((160, 1), f"{srv.player_count}/{srv.max_players}", "white", ImageFont.truetype("static/Verdana-Bold.ttf", 11))
+				draw.text((160, 15.5), (srv.map_name[:16] + " ...") if len(srv.map_name) > 16 else srv.map_name, "white", ImageFont.truetype("static/Arial.ttf", 10))
+			except Exception as e:
+				print(server, e)
+				img = Image.open("static/img/servers/template-offline.png")
+				draw = ImageDraw.Draw(img)
+			draw.text((34, 15.5), f"play.elisttm.space:{serverlist[server]['port']}", "white", ImageFont.truetype("static/Arial.ttf", 10))
+			draw.text((34, 1), serverlist[server]['name'], "white", ImageFont.truetype("static/Verdana-Bold.ttf", 11))
+			img.save(f"static/img/servers/banner-{server}.png")
+		banrand = time.time_ns()
 		print("server banners refreshed!")
 		await asyncio.sleep(200)
-
 
 hyperconfig = hypercorn.config.Config()
 hyperconfig.bind = ["0.0.0.0:7575"]

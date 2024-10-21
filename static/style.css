@@ -10,19 +10,19 @@ nav {display: flex; gap: 4px;}
 nav > a {font-family: "Trebuchet MS"; padding: 8px; flex-basis: 20%; text-decoration: none; font-weight: bold; overflow: hidden;}
 nav > a:hover, nav > a:active {background-color: #000; transition: 0.5s;}
 main, nav > a {background-color: rgba(0,0,0,0.8); border: 4px outset #fff;}
-main {padding: 16px 0 32px;}
+main {padding: 24px 0 32px;}
 
 h1, h2, h3 {font-family: monospace}
 h1, h2, h3, p {margin: 12px 64px 16px;}
 p {text-align: justify; text-align-last: center; word-spacing: 2px;}
 p br {display: block; margin-top: 8px; content: ""}
-a {color: #fff; text-decoration: underline; cursor: url('/static/img/cursor-pointer.gif'), pointer;}
+a {color: inherit; text-decoration: underline; cursor: url('/static/img/cursor-pointer.gif'), pointer;}
 a:hover {filter: brightness(80%); transition: 0.1s}
 
 ul {display: inline-block; text-align: left;}
 li {margin-bottom: 16px;}
 
-img {max-height: 100%; max-width: 100%; aspect-ratio: attr(width) / attr(height); }
+img {max-height: 100%; max-width: 100%;}
 main img {margin: 1px 0; border: 0;}
 img, span, .inline {display: inline-block; vertical-align: middle;}
 
@@ -37,7 +37,7 @@ img, span, .inline {display: inline-block; vertical-align: middle;}
 	nav > a {flex-basis: 25%; flex-grow: 1; padding: 6px 2px}
 	nav > a[href="/"],
 	nav > a[href="/about"] {flex-basis: 40%;}
-	h1, h2, h3, p {margin-left: 24px; margin-right: 24px;}
+	h1, h2, h3, p {margin-left: 32px; margin-right: 32px;}
 	.mb {display: block;}
 	.mv {display: none;}
 }

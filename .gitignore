@@ -1,9 +1,10 @@
-.env
-.notes
-start.sh
 **/__pycache__/
 poetry.lock
 pyproject.toml
 requirements.txt
-
+.env
+.notes
+start.sh
+**.db
+**.journal
 **/servers/banner-*
