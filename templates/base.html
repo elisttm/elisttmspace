@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en-US"><head>
-	<title>{% block title %}elisttm{% endblock %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
-	<link rel="icon" href="/static/img/logo16.png" type='image/png' sizes="16x16"/>
-	<link rel="icon" href="/static/img/logo32.png" type='image/png' sizes="32x32"/>
-	<link rel="icon" href="/static/img/logo64.png" type='image/png' sizes="64x64"/>
 	<link rel="icon" href="/static/img/logo128.png" type='image/png' sizes="128x128"/>
+	<link rel="icon" href="/static/img/logo64.png" type='image/png' sizes="64x64"/>
+	<link rel="icon" href="/static/img/logo32.png" type='image/png' sizes="32x32"/>
+	<link rel="icon" href="/static/img/logo16.png" type='image/png' sizes="16x16"/>
 	<link rel="prefetch" href="static/img/bg/{{ self.background() }}"/>
 	<meta charset="utf-8"/>
-	<meta property="og:title" content="{{ self.title() }}{% if not self.title() %}elisttm.space{% endif %}"/>
-	<meta name="description" content="{% block desc %}my silly website for all my projects{% endblock %}"/>
-	<meta property="og:description" content="{{ self.desc() }}"/>
-	<meta property="og:site_name" content="elisttm"/>
-	<meta property="og:type" content="website"/>
+	<title>{% block title %}elisttm{% endblock %}</title>
+	<meta name="description" content="{% block desc %}my silly website{% endblock %}"/>
 	<meta name="darkreader-lock">
 	<meta name="theme-color" content="#ffaec9"/>
 	<meta name="twitter:site" content="@elisttm"/>
-	<meta property="og:image" content="/static/img/{% block image %}logo.png{% endblock %}"/>
-	{%- block extra %}{% endblock %}
-</head><body style="background:#000{% if self.background() %} url('static/img/bg/{% block background %}{% endblock %}');{% endif %}">
+	<meta property="og:title" content="{{ self.title() }}{% if not self.title() %}elisttm.space{% endif %}"/>
+	<meta property="og:description" content="{{ self.desc() }}"/>
+	<meta property="og:site_name" content="elisttm"/>
+	<meta property="og:type" content="website"/>
+	{%- block extra %}{% endblock %}</head>
+<body style="background:#000{% if self.background() %} url('static/img/bg/{% block background %}{% endblock %}');{% endif %}">
 
-<header>
+<div class="header">
 	<a href="/"><img src="/static/img/banner.gif" alt="elisttm.space" width="500"/></a>
-</header>
+</div>
 
 <nav>
 	<a href="/">home</a>
@@ -33,8 +32,8 @@
 	<a href="/pages">pages</a>
 </nav>
 
-<main>
-	{%- block content %}{% endblock %}</main>
+<div class="main">
+	{%- block content %}{% endblock %}</div>
 
 </body></html>
 

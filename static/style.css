@@ -1,16 +1,16 @@
 * {box-sizing: border-box;}
 
 ::selection {color: #000; background: #ffaec9;}
-:root {cursor: url('/static/img/cursor-default.gif'), auto; image-rendering: pixelated; image-rendering: -moz-crisp-edges; image-rendering: crisp-edges; -webkit-font-smoothing: subpixel-antialiased;}
+:root {cursor: url('/static/img/cursor-default.gif'), auto;}
 
-body {font-family: sans-serif; text-align: center; color: #fff; padding: 0; margin: 0 auto; width: 608px;}
+body {font-family: sans-serif; text-align: center; color: #fff; padding: 0; margin: 0 auto; width: 600px;}
 
-header, main, nav {margin: 4px 0 0; overflow: hidden;}
+.header, nav, .main {margin: 4px 0; overflow: hidden;}
 nav {display: flex; gap: 4px;}
 nav > a {font-family: "Trebuchet MS"; padding: 8px; flex-basis: 20%; text-decoration: none; font-weight: bold; overflow: hidden;}
 nav > a:hover, nav > a:active {background-color: #000; transition: 0.5s;}
-main, nav > a {background-color: rgba(0,0,0,0.8); border: 4px outset #fff;}
-main {padding: 24px 0 32px;}
+.main, nav > a {background-color: rgba(0,0,0,0.8); border: 4px outset #fff;}
+.main {padding: 24px 0 32px;}
 
 h1, h2, h3 {font-family: monospace}
 h1, h2, h3, p {margin: 12px 64px 16px;}
@@ -22,8 +22,8 @@ a:hover {filter: brightness(80%); transition: 0.1s}
 ul {display: inline-block; text-align: left;}
 li {margin-bottom: 16px;}
 
-img {max-height: 100%; max-width: 100%;}
-main img {margin: 1px 0; border: 0;}
+img {max-height: 100%; max-width: 100%; image-rendering: pixelated; image-rendering: crisp-edges;}
+.main img {margin: 1px 0; border: 0;}
 img, span, .inline {display: inline-block; vertical-align: middle;}
 
 .button {display: inline-block; border: 4px outset #bbb; background-color: #ddd; color: #000; font-size: 0.9em; text-decoration: none; padding: 4px; margin: 8px 2px}
@@ -32,7 +32,7 @@ img, span, .inline {display: inline-block; vertical-align: middle;}
 
 @media screen and (max-width: 600px) {
 	body {width: 100vw;}
-	header, nav, main {margin: 4px 8px 0}
+	header, nav, .main {margin: 4px}
 	nav {flex-wrap: wrap;}
 	nav > a {flex-basis: 25%; flex-grow: 1; padding: 6px 2px}
 	nav > a[href="/"],

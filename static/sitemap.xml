@@ -19,9 +19,9 @@
 		<loc>https://elisttm.space/gmod</loc>
 		<priority>0.7</priority>
 	</url>
-	<url>
+		<url>
 		<loc>https://elisttm.space/tf2</loc>
-		<priority>0.7</priority>
+		<priority>0.6</priority>
 	</url>
 	<url>
 		<loc>https://elisttm.space/bot</loc>
