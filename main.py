@@ -1,8 +1,7 @@
-import os, dotenv, asyncio, quart, hypercorn, sqlite3, a2s, time, datetime
+import os, asyncio, quart, hypercorn, sqlite3, a2s, time
 from quart import request, redirect, url_for, render_template, send_from_directory
 from PIL import Image, ImageFont, ImageDraw
 
-dotenv.load_dotenv()
 path = os.path.dirname(os.path.realpath(__file__))+'/' # this is really stupid
 is_up = True
 banrand = 0
@@ -100,6 +99,12 @@ async def redirect_server():
 async def homunculus():
 	return await send_from_directory(app.static_folder, "img/homunculus.png")
 
+@app.route('/sitemap.xml')
+@app.route('/robots.txt')
+@app.route('/favicon.ico')
+async def static_from_root():
+	return await send_from_directory(app.static_folder, request.path[1:])
+
 @app.errorhandler(404)
 @app.errorhandler(500)
 async def error_handler(error):
@@ -110,11 +115,6 @@ async def error_handler(error):
 	response.headers.set("X-Robots-Tag", "noindex")
 	return response
 
-@app.route('/sitemap.xml')
-@app.route('/robots.txt')
-@app.route('/favicon.ico')
-async def static_from_root():
-	return await send_from_directory(app.static_folder, request.path[1:])
 
 server_data = {"ip": "73.207.108.187", "time": 0}
 servers = {
