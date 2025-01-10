@@ -1,10 +1,8 @@
 **/__pycache__/
-poetry.lock
-pyproject.toml
-requirements.txt
 .env
 .notes
-start.sh
+**.sh
 **.db
 **.journal
+
 **/servers/banner-*
