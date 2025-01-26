@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-US"><head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" href="/static/style.css" type="text/css"/>
+	<link rel="stylesheet" href="/static/style.css?v=26" type="text/css"/>
 	<link rel="icon" href="/static/img/logo.png" type='image/png' sizes="128x128"/>
 	<link rel="icon" href="/static/img/logo64.png" type='image/png' sizes="64x64"/>
 	<link rel="icon" href="/static/img/logo32.png" type='image/png' sizes="32x32"/>
 	<link rel="icon" href="/static/img/logo16.png" type='image/png' sizes="16x16"/>
-	<link rel="prefetch" href="static/img/bg/{{ self.background() }}"/>
 	<meta charset="utf-8"/>
 	<title>{% block title %}elisttm{% endblock %}</title>
 	<meta name="description" content="{% block desc %}my silly website{% endblock %}"/>
@@ -18,7 +17,7 @@
 	<meta property="og:site_name" content="elisttm"/>
 	<meta property="og:type" content="website"/>
 	{%- block extra %}{% endblock %}</head>
-<body style="background:#000{% if self.background() %} url('static/img/bg/{% block background %}{% endblock %}');{% endif %}">
+<body style="background:#000{% if self.background() %} url('/static/img/bg/{% block background %}{% endblock %}');{% endif %}">
 
 <div class="header">
 	<a href="/"><img src="/static/img/banner.gif" alt="elisttm.space" width="500"/></a>
@@ -26,7 +25,7 @@
 
 <nav>
 	<a href="/">home</a>
-	<a href="/about">about</a>
+	<a href="/projects">projects</a>
 	<a href="/eli">eli</a>
 	<a href="/servers">servers</a>
 	<a href="/pages">pages</a>

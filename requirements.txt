@@ -1,4 +1,5 @@
 quart
 hypercorn
 a2s
+mcstatus
 pillow

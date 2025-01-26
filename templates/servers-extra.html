@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}extra game servers{% endblock %}
+{% block desc %}extra links for extra servers i dont want on the main page{% endblock %}
+
+{% block background %}code.gif{% endblock %}
+
+{% block content %}
+
+	<h1>extra game servers</h1>
+
+    <p>servers that arent kept online 24/7 or just arent as interesting</p>
+    
+    <div class="servers">
+        <a href="/connect/jazz"><img src="/static/img/servers/banner-jazz.gif?{{time}}" width="330" height="31" alt=""/></a>
+        <a href="/connect/sven"><img src="/static/img/servers/banner-sven.gif?{{time}}" width="330" height="31" alt=""/></a>
+        <br>
+        <a href="/mc"><img src="/static/img/servers/banner-mc.gif?{{time}}" width="330" height="31" alt=""/></a>
+    </div>
+    
+    <a class="btn" href="/servers">go back</a><br>
+
+
+
+{% endblock %}
