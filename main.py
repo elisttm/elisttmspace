@@ -1,4 +1,4 @@
-import os, asyncio, quart, hypercorn, sqlite3
+import os, asyncio, quart, hypercorn, sqlite3, time
 from quart import request, redirect, url_for, render_template, send_from_directory
 import servers as srv
 
@@ -13,7 +13,7 @@ app.config["BACKGROUND_TASK_SHUTDOWN_TIMEOUT "] = 0
 
 @app.before_serving
 async def startup():
-    app.add_background_task = asyncio.ensure_future(srv.fetch_servers())
+    app.add_background_task = asyncio.ensure_future(srv.draw_banners())
 
 @app.after_serving
 async def shutdown():
@@ -40,11 +40,11 @@ async def _sona():
 
 @app.route('/servers')
 async def _servers():
-    return await render_template('servers.html', time=srv.timestamp)
+    return await render_template('servers.html', time=srv.timestamp, curtime=int(time.time()))
 
 @app.route('/servers/extra')
 async def _servers_extra():
-    return await render_template('servers-extra.html', time=srv.timestamp)
+    return await render_template('servers-extra.html', time=srv.timestamp, curtime=int(time.time()))
 
 @app.route('/gmod')
 async def _gmod():

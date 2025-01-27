@@ -28,6 +28,14 @@
 		<priority>0.7</priority>
 	</url>
 	<url>
+		<loc>https://elisttm.space/mc</loc>
+		<priority>0.6</priority>
+	</url>
+	<url>
+		<loc>https://elisttm.space/servers/extra</loc>
+		<priority>0.5</priority>
+	</url>
+	<url>
 		<loc>https://elisttm.space/pack</loc>
 		<priority>0.5</priority>
 	</url>

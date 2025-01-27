@@ -101,7 +101,7 @@ def query_server(server):
         return None
     
 
-async def fetch_servers():
+async def draw_banners():
     global timestamp
     while True:
         for server in servers:
@@ -122,5 +122,5 @@ async def fetch_servers():
                 draw = ImageDraw.Draw(img)
             draw.text((34, 1), servers[server]['name'], "white", ImageFont.truetype(f"{path}static/Verdana-Bold.ttf", 11))
             img.save(f"{path}static/img/servers/banner-{server}.gif")
-        timestamp = time.time_ns()
+        timestamp = int(time.time())
         await asyncio.sleep(60)
